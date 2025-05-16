@@ -1,0 +1,18 @@
+{
+    frankenphp
+    order php_server before file_server
+    auto_https off  # This fixes the SSL error!
+}
+
+:80 {
+    root * /app
+    php_server
+    file_server
+    
+    # Security headers
+    header {
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        X-XSS-Protection "1; mode=block"
+    }
+}
